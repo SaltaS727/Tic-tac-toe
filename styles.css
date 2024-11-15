@@ -1,0 +1,155 @@
+:root {
+    --cell-size: 100px;
+    --color-hover: #DAA520; /* Gold color for hover */
+    --color-set: #8B0000;   /* Deep red color for set symbols */
+    --line-width: 10px;     /* Line width for X */
+    --background-color: rgba(0, 0, 0, 0.7); /* Slight overlay for readability */
+}
+
+body {
+    margin: 0;
+    font-family: 'Papyrus', 'Courier New', monospace; /* Egyptian-inspired font */
+    color: #f0e68c; /* Sand-like color for text */
+    background-image: url('bckg.jpg'); /* Use the uploaded image */
+    background-size: 50%; /* Set the background to half size for tiling */
+    background-repeat: repeat; /* Repeat the background image */
+    background-position: center; /* Center the image */
+    position: relative;
+    overflow: hidden;
+}
+
+.board {
+    width: 100vw;   
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 2px solid #8B0000; /* Egyptian deep red border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Remove borders for edges */
+.cell:nth-child(1),
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}
+
+.cell:nth-child(1),
+.cell:nth-child(4),
+.cell:nth-child(7) {
+    border-left: none;
+}
+
+.cell:nth-child(3),
+.cell:nth-child(6),
+.cell:nth-child(9) {
+    border-right: none;
+}
+
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9) {
+    border-bottom: none;
+}
+
+/* Disable cursor on filled cells */
+.cell.x,
+.cell.circle {
+    cursor: not-allowed;
+}
+
+/* X hover effect */
+.board.x .cell:not(.circle):not(.x):hover {
+    background: linear-gradient(to top right, transparent calc(50% - var(--line-width) / 2), var(--color-hover) calc(50% - var(--line-width) / 2), var(--color-hover) calc(50% + var(--line-width) / 2), transparent calc(50% + var(--line-width) / 2)),
+                linear-gradient(to bottom right, transparent calc(50% - var(--line-width) / 2), var(--color-hover) calc(50% - var(--line-width) / 2), var(--color-hover) calc(50% + var(--line-width) / 2), transparent calc(50% + var(--line-width) / 2));
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* X set effect */
+.cell:not(.circle).x {
+    background: linear-gradient(to top right, transparent calc(50% - var(--line-width) / 2), var(--color-set) calc(50% - var(--line-width) / 2), var(--color-set) calc(50% + var(--line-width) / 2), transparent calc(50% + var(--line-width) / 2)),
+                linear-gradient(to bottom right, transparent calc(50% - var(--line-width) / 2), var(--color-set) calc(50% - var(--line-width) / 2), var(--color-set) calc(50% + var(--line-width) / 2), transparent calc(50% + var(--line-width) / 2));
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Circle hover effect */
+.board.circle .cell:not(.circle):not(.x):hover {
+    background: radial-gradient(circle, var(--color-hover) 60%, transparent 60%);
+}
+
+/* Circle set effect */
+.cell:not(.x).circle {
+    background: radial-gradient(circle, var(--color-set) 60%, transparent 60%);
+}
+
+/* Winning message styling */
+.winning-message {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--background-color);
+    justify-content: center;
+    align-items: center;
+    color: #f0e68c; /* Sand-like color for text */
+    font-size: 4rem;
+    font-family: 'Papyrus', 'Courier New', monospace;
+    flex-direction: column;
+}
+
+.winning-message button {
+    border-radius: 10px;
+    font-size: 2rem;
+    background-color: #f0e68c; /* Sand color for button */
+    border: 1px solid var(--color-set);
+    padding: 0.25em 0.5em;
+    cursor: pointer;
+    color: #8B0000; /* Deep red text color */
+}
+
+.winning-message button:hover {
+    background-color: var(--color-set);
+    color: #f0e68c;
+    border-color: #f0e68c;
+}
+
+.winning-message.show {
+    display: flex;
+}
+.origin-message {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    color: #f0e68c; /* Sand-like color */
+    font-family: 'Papyrus', 'Courier New', monospace;
+    font-size: 1.2rem;
+    opacity: 0.9;
+    padding: 10px 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for readability */
+    z-index: 10;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}

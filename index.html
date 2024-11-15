@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Tic-Tac-Toe - Egyptian Edition</title>
+</head>
+<body>
+    <div class="game-container">
+        <!-- Tic Tac Toe Board -->
+        <div class="board" id="board" aria-label="Tic Tac Toe Board">
+            <div class="cell" data-cell aria-label="Cell 1"></div>
+            <div class="cell" data-cell aria-label="Cell 2"></div>
+            <div class="cell" data-cell aria-label="Cell 3"></div>
+            <div class="cell" data-cell aria-label="Cell 4"></div>
+            <div class="cell" data-cell aria-label="Cell 5"></div>
+            <div class="cell" data-cell aria-label="Cell 6"></div>
+            <div class="cell" data-cell aria-label="Cell 7"></div>
+            <div class="cell" data-cell aria-label="Cell 8"></div>
+            <div class="cell" data-cell aria-label="Cell 9"></div>
+        </div>
+        
+        <!-- Winning Message Display -->
+        <div class="winning-message" id="winningMessage" aria-live="polite">
+            <div id="winningMessageText" aria-label="Winning Message"></div>
+            <button id="restartButton" aria-label="Restart Game">Restart</button>
+        </div>
+    </div>
+
+    <!-- Historical Message -->
+    <div class="origin-message">
+        <p>Tic Tac Toe was originally invented in ancient Egypt, dating back to around 1300 BC.</p>
+    </div>
+
+    <!-- Script Loading After Content for Improved Performance -->
+    <script src="script.js" defer></script>
+</body>
+</html>
